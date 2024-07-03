@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>user data</title>
+</head>
+<body>
+  <table style="background-color: #2e2424; color: rgb(202, 182, 182);"  >
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>username</th>
+        <th>email</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% for (let i = 0; i < result.length; i++) { %>
+        <tr>
+        <td><%=result[i].id%></span>
+        <td><%=result[i].username%></span>
+        <td><%=result[i].email%></span>
+        </tr> 
+      <% } %>
+    </tbody>
+  </table>
+</body>
+</html>
+<!-- 
+for (let i = 0; i < result.length; i++) {
+  <div>
+  <span>result.id</span>
+  <span>result.username</span>
+  <span>result.email</span>
+  </div> 
+} -->
+
