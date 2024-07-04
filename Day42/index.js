@@ -61,13 +61,36 @@ app.use(express.raw())
 //   }
 // });
 
-
-app.post("/user", (req, res) => {
-  const {id, username, email, password} = req.body;
+// const {v4: uuidv4} = require('uuid');
+// app.post("/user", (req, res) => {
+//   const { username, email, password} = req.body;
+//   const data = [uuidv4(), username, email, password];
+//   const q = `INSERT INTO user (id, username, email, password) VALUES (?, ?, ?, ?)`;
+//   try {
+//     connection.query(q, data, (err, result) => {
+//       if(err) throw err;
+//       console.log(result)
+//     })
   
-  console.log(id, username, email;)
-});
+//   } catch (err) {
+//     console.log(err);
+//   }
+// });
 
+
+app.delete("/user/:id", (req, res) => {
+  const {id} = req.params;
+  const q = `DELETE FROM user Where id = ?`;
+  try {
+    connection.query(q, id, (err, result) => {
+      if(err) throw err;
+      console.log(result);
+      res.send("success");
+    })
+  } catch(err) {
+    console.log(err);
+  }
+});
 
 
 
