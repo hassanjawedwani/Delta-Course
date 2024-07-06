@@ -3,9 +3,19 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>Chats</title>
+  <link rel="stylesheet" href="styles.css"/>
 </head>
 <body>
-  
+  <% for (let i = 0; i < chats.length; i++) { %>
+    <div class="chat">
+      <p><strong>Id : </strong><%=chats[i].id%></h>
+      <p><strong>From:  </strong><%=chats[i].from%></p>
+      <p><strong>To:  </strong><%=chats[i].to%></p>
+      <p class="msg"><strong>Message:  </strong><%=chats[i].message%></p>
+      <p><strong>Date:  </strong><%=chats[i].createdAt%></p>
+    </div>
+  <% } %>
 </body>
 </html>
+
