@@ -1,4 +1,5 @@
 const express = require("express");
+const ExpressError = require("./expressError");
 
 const app = express();
 
@@ -32,6 +33,17 @@ app.listen(port, () => {
 //   res.send("Access Denied");
 // })
 
+app.get("/admin", (err, req, res, next) => {
+  throw new ExpressError(403, "admin don't have access");
+})
+
+
+app.get("/err", (req, res) => {
+  abcd = abcd;
+  res.send("abcddddd error");
+})
+
+
 app.use("/random", (req, res, next) => {
   console.log("hi i'm middleware for random page");
   next();
@@ -53,13 +65,26 @@ const checkToken = (req, res, next) => {
   if (token === "giveaccess") {
     next();
   }
-  throw new Error("Access Denied");
+  throw new ExpressError(401, "motherfucker Access Denied");
 }
 
 app.get("/api", checkToken,  (req, res) => {
   res.send("here is api data");
 })
 
-app.use( (req, res) => {
-  res.send("error 404")
-})
+
+// app.use("/*", (req, res) => {
+//   res.send("error 404")
+// })
+
+// app.use((err, req, res, next) => {
+//   console.log("------Error-------")
+//   let {status=500, message="some error occured"} = err;
+//   res.status(status).send(message);
+// });
+
+// app.use((err, req, res, next) => {
+//   console.log("-------Error 2----------");
+//   next(err);
+// })
+
