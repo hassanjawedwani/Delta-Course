@@ -17,6 +17,15 @@ const customerSchema = new mongoose.Schema({
   ]
 });
 
+customerSchema.post("findOneAndDelete", async(customer) => {
+  console.log("Post middleware")
+  if (customer.orders.length) {
+    let deletedOrders = await Order.deleteMany({ _id: {$in: customer.orders}});
+    console.log("Deleted Orders: \n", deletedOrders);
+  }  
+})
+
+
 const Customer = mongoose.model("Customer", customerSchema);
 
 // const addCustomer = async() => {
@@ -34,9 +43,18 @@ const Customer = mongoose.model("Customer", customerSchema);
 // addCustomer().catch(err => console.log(err));
 
 
-const findCustomer = async() => {
-  const customersData = await Customer.find({}).populate("orders");
-  console.log(customersData[0]);
+// const findCustomer = async() => {
+//   const customersData = await Customer.find({}).populate("orders");
+//   console.log(customersData[0]);
+// }
+
+// findCustomer().catch(err => console.log(err));
+
+
+
+const deleteCustomer = async() => {
+  let deletedCustomer = await Customer.findByIdAndDelete('668fb5a8eb7396fa6c239806');
+  console.log("Delete Customer: \n", deletedCustomer);
 }
 
-findCustomer().catch(err => console.log(err));
+deleteCustomer().catch(err => console.log("Error in deleteCustomer function: ", err));
