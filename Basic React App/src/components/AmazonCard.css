@@ -1,0 +1,19 @@
+.AmazonCard {
+  border: 2px solid grey;
+  border-radius: 1rem;
+  text-align: center;
+  width: 200px ;
+  max-width: 200px;
+  padding: 2px
+}
+
+.AmazonCard > ul > li {
+  list-style: none;
+}
+
+.AmazonCard h4 {
+  background-color: yellow;
+  margin: 0;
+  border-radius: 1rem;
+  
+}
