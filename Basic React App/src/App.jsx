@@ -1,18 +1,12 @@
 import { useState } from 'react';
 import './App.css';
+import TodoApp from './components/TodoApp';
 
 
 function App() {
-  const [arr, setArr] = useState([]);
-  const addItem = () => {
-    console.log(arr);
-    setArr([...arr, "fuck"]);
-  }
-
   return (
     <div>
-      {arr}
-      <button onClick={addItem}>Add</button>
+      <TodoApp />
     </div>
   )
 }
