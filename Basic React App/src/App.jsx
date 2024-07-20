@@ -1,17 +1,20 @@
+import { useState } from 'react';
 import './App.css';
-import AmazonCard from './components/AmazonCard';
-import AmazonCardTab from './components/AmazonCardTab';
-import Greeting from './components/Greeting';
-import ProductTab from './components/ProductTab';
+
 
 function App() {
+  const [arr, setArr] = useState([]);
+  const addItem = () => {
+    console.log(arr);
+    setArr([...arr, "fuck"]);
+  }
+
   return (
     <div>
-      {/* <ProductTab /> */}
-      {/* <Greeting userName="Hassan Jawed" color="brown" /> */}
-      <AmazonCardTab />
+      {arr}
+      <button onClick={addItem}>Add</button>
     </div>
-  );
+  )
 }
 
 export default App;
