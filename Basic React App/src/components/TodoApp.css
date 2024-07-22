@@ -67,3 +67,7 @@
   padding: 3px 7px;
   margin-left: 10px
 }
+
+.toggle-strike {
+  text-decoration: line-through;
+}

@@ -34,12 +34,31 @@ export default function TodoApp() {
     })
   }
 
+  const handleCompleted = (id) => {
+
+    setTaskList((prevList) => {
+      return prevList.map(task => {
+        if(task.id === id) {
+          return {
+            ...task,
+            isDone: !task.isDone
+          }
+        }
+        else {
+          return {
+            ...task
+          }
+        }
+      })
+    })
+  }
+
   
 
   const handleForm = (e) => {
     e.preventDefault();
     setTaskList((prevValue) => {
-      return [...prevValue, { id: uuidv4(), task }];
+      return [...prevValue, { id: uuidv4(), task, isDone: false }];
     });
     setTask("");
     
@@ -63,9 +82,11 @@ export default function TodoApp() {
           {
             taskList.map((task) => (
               <li key={task.id}>
-                  {task.task}
+                  <span className={task.isDone ? "toggle-strike" : ""}>{task.task}</span>
                   <button className="btn" onClick={() => handleDelete(task.id)}>Delete</button>
-                  <button className="btn" onClick={() => handleUpperCase(task.id)}>UpperCase</button>
+                  <button className="btn" onClick={() => handleCompleted(task.id)}>
+                    { task.isDone ?  <span>Undo</span> : <span>Done</span>  }
+                  </button>
               </li>
             ))
           }

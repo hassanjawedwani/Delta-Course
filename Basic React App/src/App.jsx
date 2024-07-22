@@ -1,12 +1,11 @@
-import { useState } from 'react';
 import './App.css';
-import TodoApp from './components/TodoApp';
+import Forms from './components/Forms';
 
 
 function App() {
   return (
     <div>
-      <TodoApp />
+      <Forms />
     </div>
   )
 }
