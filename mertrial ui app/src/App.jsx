@@ -1,3 +1,4 @@
+import InfoBox from "./InfoBox";
 import SearchBox from "./SearchBox";
 
 function App() {

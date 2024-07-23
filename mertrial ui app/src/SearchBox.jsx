@@ -1,33 +1,62 @@
-if(process.env.NODE_ENV !="production") {
-  require('dotenv').config()
-}
-console.log(process.env.CLOUD_NAME);
-
-
 import { Button, TextField } from "@mui/material";
 import "./SearchBox.css";
 import { useState } from "react";
+import InfoBox from "./InfoBox";
 
 function SearchBox() {
   const [city, setCity] = useState("");
+  const apiKey = "af3a13b1f4fc4120eafed54d6a59a0bf";
+  const [geocodingDetails, setGeocodingDetails] = useState([]);
+  const [weatherDetails, setWeatherDetails] = useState({});
+  const [weatherInfo, setWeatherInfo] = useState({
+    feels_like: 0,
+    grnd_level: 0,
+    humidity: 0,
+    pressure: 0,
+    sea_level: 0,
+    temp: 0,
+    temp_max: 0,
+    temp_min: 0,
+  });
 
-  // API_URL="https://api.openweathermap.org/data/3.0/onecall?lat={lat}&lon={lon}&exclude={part}&appid={API key}";
-  // CordinatesFinder="http://api.openweathermap.org/geo/1.0/direct?q={city name},{state code},{country code}&limit={limit}&appid={API key}"
+  const getWeatherInfo = async () => {
+    fetch(
+      `http://api.openweathermap.org/geo/1.0/direct?q=${city}&appid=${apiKey}`
+    ).then((response) =>
+      response.json().then((result) => {
+        setGeocodingDetails([...result]);
+      })
+    );
+  };
+  const getWeatherDetails = async () => {
+    fetch(
+      `https://api.openweathermap.org/data/2.5/weather?lat=${geocodingDetails[0].lat}&lon=${geocodingDetails[0].lon}&appid=${apiKey}&units=metric`
+    )
+    .then((response) =>
+      response
+        .json()
+        .then((result) => {
+          setWeatherDetails({ ...result });
+        })
+        .catch((err) => console.log(err))
+    )
+  };
 
-  const apiKey = process.env.API_KEY;
-
-  const getWeatherInfo = async() => {
-    fetch(`"http://api.openweathermap.org/geo/1.0/direct?q=${city}&appid=${apiKey}"`)
-    .then(response => response.json().then(result => {
-      console.log(result);
-    }));
+  const finalInfo = () => {
+    setWeatherInfo({
+      ...weatherDetails.main
+    })
+   
   }
 
-
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    getWeatherInfo();
-  }
+    await getWeatherInfo();
+    await getWeatherDetails();
+    finalInfo();
+    console.log(weatherInfo)
+
+  };
 
   return (
     <div>
@@ -49,6 +78,7 @@ function SearchBox() {
           </Button>
         </form>
       </div>
+      {weatherInfo && <InfoBox data={weatherInfo} />}
     </div>
   );
 }
