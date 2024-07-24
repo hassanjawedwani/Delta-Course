@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Tailwind CSS</title>
+  </head>
+  <body>
+    <div class="custom-flex-center h-screen w-full font-sans">
+      <div
+        class="bg-gray-300 w-1/2 h-96 border border-solid border-black rounded"
+      >
+        <div class="custom-flex-center h-1/3 bg-blue-400">
+          <h1 class="text-center text-3xl text-white font-bold">
+            News you can trust
+          </h1>
+        </div>
+        <div class="h-2/3 flex flex-col justify-center items-center space-y-2">
+          <h2 class="text-3xl font-semi-bold">Stay up to date with latest!</h2>
+          <p class="text-2xl font-normal">
+            Subcribe to our newsletter to get updates straight into your inbox
+          </p>
+          <input
+            type="text"
+            name="email"
+            
+            placeholder="you@example.com"
+            required
+            class="w-1/2 h-8 p-2 rounded"
+          />
+          <button type="button" class="w-1/2 h-8 p-2 rounded-2xl bg-blue-400 text-white custom-flex-center text-lg font-semibold">Subcribe Now</button>
+          <p class="text-1xl font-medium">we value your privacy</p>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
